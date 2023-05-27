@@ -1,7 +1,40 @@
+import { useEffect, useState } from "react";
+import useMediaQuery from "./hooks/useMediaQuery";
+import Navbar from "./scenes/Navbar";
+import DotGroup from "./scenes/DotGroup";
+
 function App() {
+  const [selectedPage, setSelectedPage] = useState("home");
+
+  const [isTopPage, setIsTopPage] = useState("home");
+  const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
+
+  useEffect(() => {
+    const handScroll = () => {
+      if (window.scrollY === 0) setIsTopPage(true);
+      if (window.scrollX !== 0) setIsTopPage(false);
+    };
+    window.addEventListener("scroll", handScroll);
+    return () => window.removeEventListener("scroll", handScroll);
+  });
+
   return (
     <>
-      <h1 className="text-3xl font-bold underline bg-red-400">Hello world!</h1>
+      <div className="app bg-deep-blue">
+        <Navbar
+          isTopPage={isTopPage}
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+        <div className="w-5/6 mx-auto md:h-full">
+          {isAboveMediumScreens && (
+            <DotGroup
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+          )}
+        </div>
+      </div>
     </>
   );
 }
