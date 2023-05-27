@@ -7,7 +7,7 @@ import Landing from "./scenes/Landing";
 function App() {
   const [selectedPage, setSelectedPage] = useState("home");
 
-  const [isTopPage, setIsTopPage] = useState("home");
+  const [isTopOfPage, setIsTopPage] = useState("home");
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
     <>
       <div className="app bg-deep-blue">
         <Navbar
-          isTopPage={isTopPage}
+          isTopOfPage={isTopOfPage}
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
         />
